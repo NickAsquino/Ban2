@@ -1,0 +1,34 @@
+ENDERECO(idEndereco PK, cidade, rua, nroCasa, telefone)
+
+MUSICO(nroRegistro PK, nome, idEndereco FK→ENDERECO.idEndereco)
+
+AUTOR(idAutor PK, nome)
+
+INSTRUMENTO(codInterno PK, nome)
+
+BANDA(idBanda PK, nome)
+
+MUSICA(idMusica PK, titulo, autores)
+
+DISCO(identificador PK, formato, data, titulo,
+      idProdutor FK→PRODUTOR.idProdutor,
+      nroRegistro FK→MUSICO.nroRegistro,
+      idBanda FK→BANDA.idBanda)
+
+PRODUTOR(idProdutor PK, nome)
+
+MUSICO_INSTRUMENTO(nroRegistro PK, FK→MUSICO.nroRegistro,
+                   codInterno PK, FK→INSTRUMENTO.codInterno)
+
+MUSICO_BANDA(nroRegistro PK, FK→MUSICO.nroRegistro,
+             idBanda PK, FK→BANDA.idBanda)
+
+DISCO_MUSICA(identificador PK, FK→DISCO.identificador,
+             idMusica PK, FK→MUSICA.idMusica)
+
+PARTICIPACAO(idMusica PK, FK→MUSICA.idMusica,
+             nroRegistro PK, FK→MUSICO.nroRegistro,
+             idBanda PK, FK→BANDA.idBanda)
+
+MUSICA_AUTOR(idMusica PK, FK→MUSICA.idMusica,
+             idAutor PK, FK→AUTOR.idAutor)
